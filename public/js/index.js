@@ -5,40 +5,56 @@ $(document).ready(function(){
 $('#submit').click(function (event){
  event.preventDefault();
 
-  var name = $('#nameInput').val();
-  console.log(name);
+ let users = {
+   firstName: $('#firstNameInput').val(),
+   lastName: $('#lastNameInput').val(),
+   username: $('#usernameInput').val(),
+   email: $('#emailInput').val(),
+   phone: $('#phoneInput').val()
+ };
 
-  var message = $('#messageInput').val();
-  console.log(message);
+  console.log(users);
 
-//   var options = {
-//     contentType: 'application/json',
-//     type: 'POST',
-//     url: '/messages',
-//     data: JSON.stringify({name, message})
-//   };
-//
-//   $.ajax(options)
-//     .done(() => {
-//       // console.log('DONE');
-//       window.location.href = '/';
-//     })
-//     .fail((err) => {
-//       console.log(err);
-//     });
-// });
-//
-//   $.getJSON('/messages') //this fires after page reloads -->this is the API endpoint
-//     .done((results) => {
-//       //Loop through results from getJSON call to dynamically add to page
-//       for (var i = 0; i < results.length; i++) {
-//
-//         var $id = results[i].id;
-//         // console.log($id);
-//
-//         var $name = $('<h6>').text(results[i].name);
-//
-//         var $message = $('<p>').text(results[i].message);
+    var options = {
+      contentType: 'application/json',
+      type: 'POST',
+      url: '/messages',
+      data: JSON.stringify({users})
+    };
+
+    $.ajax(options)
+      .done(() => {
+        console.log('DONE');
+        window.location.href = '/';
+      })
+      .fail((err) => {
+        console.log(err);
+      });
+  });
+
+  $.getJSON('/users')
+    .done((results) => {
+      console.log(results);
+
+      for (var i = 0; i < results.length; i++) {
+        let appendUser = {
+          id: results[i].id,
+          firstName: $('<h3>').text(results[i].firstname),
+          lastName: $('<h3>').text(results[i].lastname),
+          username: $('<h5>').text(results[i].username),
+          phone: $('<h5>').text(results[i].phone),
+          email: $('<h5>').text(results[i].email)
+        }
+
+        //Append all dynamically created DOM elements to users container
+        $('#userContainer').append(appendUser.id);
+        $('#userContainer').append(appendUser.firstName);
+        $('#userContainer').append(appendUser.lastName);
+        $('#userContainer').append(appendUser.username);
+        $('#userContainer').append(appendUser.email);
+        $('#userContainer').append(appendUser.phone);
+        $('#userContainer').append('<hr />');
+      }
 //
 //         //Create Edit and Delete buttons manually
 //         var $editButton = document.createElement('button');
@@ -53,12 +69,7 @@ $('#submit').click(function (event){
 //         $deleteButton.setAttribute("id", "delete" + $id);
 //         $deleteButton.appendChild($deleteMessage);
 //
-//         //Append all dynamically created DOM elements to message container
-//         $('#messageContainer').append($message);
-//         $('#messageContainer').append($name);
-//         $('#messageContainer').append($editButton);
-//         $('#messageContainer').append($deleteButton);
-//       }
+      })
 // ////EDIT FUNCTIONALITY/////
 //       $('.editButton').click(function(event){
 //         event.preventDefault();
@@ -132,6 +143,6 @@ $('#submit').click(function (event){
 //         });
 //     })
 //     .fail(() => {
-//       $('#messageContainer').text('Could not get messages');
-//     });
+    //   $('#messageContainer').text('Could not get messages');
+    // });
 }); //document ready closure

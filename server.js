@@ -9,9 +9,9 @@ app.use(express.static('./public'));
 
 app.use(bodyParser.json());
 
-const messages = require('./routes/users');
+const users = require('./routes/users');
 
-// app.use('/users', users);
+app.use('/users', users);
 
 const port = process.env.PORT || 3000;
 
