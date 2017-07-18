@@ -18,6 +18,6 @@
 
 You can manually write the validations or use the library 'joi' to complete (see more information in Learn: https://learn.galvanize.com/cohorts/138/units/1255/content_files/25112)
 
-STRETCH:
+### STRETCH
 
 Hook up a Password input field with validations of any sort. Take it to the next level and see if you can figure out the steps you would need to take to insert this password into your users table!
