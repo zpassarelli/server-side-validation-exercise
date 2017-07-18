@@ -8,9 +8,7 @@
 5. Run knex seed file
 6. Use nodemon to open application
 
-### Add form validations in /signup for:
-
-Add the following server side validations:
+### Add the following server side validations:
 - Username: Required. Must be more than 6 characters, must start with a letter, and no punctuation
 - Password: Required. Must be more than 8 characters with at least One letter, one number, and one special character (!?/.,')
 - Email: Required. Must be formatted like an email: something@something.something
