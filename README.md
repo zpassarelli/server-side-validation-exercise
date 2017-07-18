@@ -1,5 +1,13 @@
 # Server Side Validation Exercise
 
+### Setup
+1. Fork and clone this repository
+2. Run npm install
+3. Create database users_dev
+4. Run knex migration file
+5. Run knex seed file
+6. Use nodemon to open application
+
 ### Add form validations in /signup for:
 
 Add the following server side validations:
