@@ -20,4 +20,4 @@ You can manually write the validations or use the library 'joi' to complete (see
 
 ### STRETCH
 
-Hook up a Password input field with validations of any sort. Take it to the next level and see if you can figure out the steps you would need to take to insert this password into your users table!
+Hook up a Password input field with validations of any sort. Take it to the next level and see if you can figure out the steps you would need to take to hash and then insert this password into your users table!
