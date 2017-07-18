@@ -10,8 +10,5 @@ module.exports = {
   test: {
     client: 'pg',
     connection: 'postgres://localhost/users_test'
-  },
-
-  production: { }
-
+  }
 };
