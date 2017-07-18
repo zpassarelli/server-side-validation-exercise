@@ -11,7 +11,7 @@ exports.seed = function(knex, Promise) {
           lastname: 'Ross',
           username: 'paint4life',
           email: 'bob@ross.com',
-          phone: '303-333-3333'
+          phone: '3033333333'
         },
         {
           id: 2,
@@ -19,7 +19,7 @@ exports.seed = function(knex, Promise) {
           lastname: 'Davinci',
           username: 'prettyp@ints',
           email: 'leo@davinci.com',
-          phone: '720-777-7777'
+          phone: '7207777777'
         }
       ]);
     })

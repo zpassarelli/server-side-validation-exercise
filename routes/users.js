@@ -10,7 +10,6 @@ router.get('/' , (req, res, next) => {
   knex('users')
     .select( 'id', 'firstname', 'lastname', 'username', 'phone', 'email')
     .then((results) => {
-      console.log(results);
       res.send(results);
     })
     .catch((err) => {
@@ -18,47 +17,32 @@ router.get('/' , (req, res, next) => {
     });
 });
 
-// router.get('/:id' , (req, res, next) => {
-//   const id = Number.parseInt(req.params.id);
-//   console.log('variable id', id);
-//
-//   if (Number.isNaN(id)) {
-//     return next();
-//   }
-//   knex('users')
-//     // .where('id' , id)
-//     // .select( 'id', 'firstname', 'lastname', 'username', 'email', 'phone')
-//     .then((results) => {
-//       res.send(results[0]);
-//     })
-//     .catch((err) => {
-//       next(err);
-//     });
-// });
+router.post('/' , (req, res, next) => {
+  let firstName = req.body.users.firstName;
+  let lastName = req.body.users.lastName;
+  let username = req.body.users.username;
+  let email = req.body.users.email;
+  let phone = req.body.users.phone;
 
-// router.post('/' , (req, res, next) => {
-//   var name = req.body.name;
-//   var message = req.body.message;
-//
-//   knex('users')
-//
-//     // .insert({
-//     //   firstname: firstn,
-//     //   message: message
-//     // })
-//     .returning(['name', 'message'])
-//     .then((results) => {
-//       res.send(results[0]);
-//       //OR can also delete anything we don't want in our response message
-//       //var newResults = results[0];
-//       //delete newResults.id;
-//       //delete newResults.created_at;
-//       //delete newResults.updated_at;
-//     })
-//     .catch((err) => {
-//       next(err);
-//     });
-// });
+  console.log(firstName);
+
+  knex('users')
+    .insert({
+      firstname: firstName,
+      lastname: lastName,
+      username: username,
+      email: email,
+      phone: phone
+    })
+    .returning(['firstname', 'lastname', 'username','phone','email'])
+    .then((results) => {
+      console.log(results);
+      res.send(results[0]);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
 //
 // router.patch('/:id', (req, res, next) => {
 //   var id = Number.parseInt(req.params.id);

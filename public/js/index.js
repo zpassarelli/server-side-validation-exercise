@@ -13,18 +13,16 @@ $('#submit').click(function (event){
    phone: $('#phoneInput').val()
  };
 
-  console.log(users);
-
     var options = {
       contentType: 'application/json',
       type: 'POST',
-      url: '/messages',
+      url: '/users',
       data: JSON.stringify({users})
     };
 
     $.ajax(options)
       .done(() => {
-        console.log('DONE');
+        // console.log('DONE');
         window.location.href = '/';
       })
       .fail((err) => {
@@ -34,7 +32,6 @@ $('#submit').click(function (event){
 
   $.getJSON('/users')
     .done((results) => {
-      console.log(results);
 
       for (var i = 0; i < results.length; i++) {
         let appendUser = {
