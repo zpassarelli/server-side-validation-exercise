@@ -9,8 +9,9 @@
 6. Use nodemon to open application
 
 ### Add the following server side validations:
+- First Name: Required.
+- Last Name: Required.
 - Username: Required. Must be more than 6 characters, must start with a letter, and no punctuation
-- Password: Required. Must be more than 8 characters with at least One letter, one number, and one special character (!?/.,')
 - Email: Required. Must be formatted like an email: something@something.something
 - First Name: Required
 - Last Name: Required
@@ -20,4 +21,6 @@ You can manually write the validations or use the library 'joi' to complete (see
 
 ### STRETCH
 
-Hook up a Password input field with validations of any sort. Take it to the next level and see if you can figure out the steps you would need to take to hash and then insert this password into your users table!
+Hook up a Password input field with validations below. Take it to the next level and see if you can figure out the steps you would need to take to hash and then insert this password into your users table!
+
+Password Field Requirements: Required. Must be more than 8 characters with at least One letter, one number, and one special character (!?/.,')
