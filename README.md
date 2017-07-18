@@ -14,7 +14,7 @@
 - Email: Required. Must be formatted like an email: something@something.something
 - First Name: Required
 - Last Name: Required
-- Phone Number: Required. Must be a 10 digit number formatted like: 999-888-9898
+- Phone Number: Required. Must be a 10 digit number
 
 You can manually write the validations or use the library 'joi' to complete (see more information in Learn: https://learn.galvanize.com/cohorts/138/units/1255/content_files/25112)
 
