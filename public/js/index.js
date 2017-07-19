@@ -20,17 +20,6 @@ $('#submit').click(function (event){
     data: JSON.stringify({users})
   };
 
-  // let firstName = $('#firstNameInput').val()
-  // console.log(firstName);
-  //
-  //
-  // var options = {
-  //   contentType: 'application/json',
-  //   type: 'POST',
-  //   url: '/users',
-  //   data: JSON.stringify({firstName})
-  // };
-
   $.ajax(options)
     .done(() => {
       window.location.href = '/';
