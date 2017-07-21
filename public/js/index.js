@@ -2,7 +2,7 @@
 
 $(document).ready(function(){
 
-$('#submit').click(function (event){
+$('#infoForm').submit(function (event){
  event.preventDefault();
 
   let users = {
@@ -27,7 +27,7 @@ $('#submit').click(function (event){
     .fail((err) => {
       console.log(err);
     });
-  });
+});
 
   $.getJSON('/users')
     .done((results) => {
