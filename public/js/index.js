@@ -25,7 +25,7 @@ $('#infoForm').submit(function (event){
       window.location.href = '/';
     })
     .fail((err) => {
-      console.error(err.responseText);
+      $('#errorStatus').text(err.responseText);
     });
 });
 
