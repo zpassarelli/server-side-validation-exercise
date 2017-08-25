@@ -16,43 +16,87 @@ router.get('/' , (req, res, next) => {
 });
 
 router.post('/' , (req, res, next) => {
-  let valid = true;
-  let userArr = [];
-  let firstName = req.body.users.firstName;
-  let lastName = req.body.users.lastName;
-  let username = req.body.users.username;
-  let email = req.body.users.email;
-  let phone = req.body.users.phone;
-  userArr.push(firstName,lastName,username,email,phone);
 
-  valid = userArr.every(prop => prop !== '');
+  let userObj = req.body.users;
 
-  if(username.length < 7){
-    valid = false;
-  }
-  let firstChar = username[0].toLowerCase().charCodeAt();
-  if(firstChar)
-
-  console.log(valid);
-  if(valid){
-    knex('users')
-      .insert({
-        firstname: firstName,
-        lastname: lastName,
-        username: username,
-        email: email,
-        phone: phone
-      })
-      .returning(['firstname', 'lastname', 'username','phone','email'])
-      .then((results) => {
-        res.send(results[0]);
-      })
-      .catch((err) => {
-        next(err);
-      });
+  //All inputs required
+  if(Object.values(userObj).every(val => val !== '') === false){
+    res.status(418).send('All form inputs required.');
   } else {
-    res.send('invalid');
+
+    let valid = true;
+    let errorMsg = 'Invalid form input';
+
+    //Username at least 7 characters
+    if(userObj.username.length < 7) {
+      valid = false;
+      errorMsg = 'Username must be at least seven characters.'
+    }
+
+    //Username starts with a letter
+    let firstChar = userObj.username[0].toLowerCase().charCodeAt();
+    if(firstChar < 97 || firstChar > 122){
+      valid = false;
+      errorMsg = 'Username must start with a letter.';
+    }
+
+    //Username does not contain punctuation
+    for(let i in userObj.username){
+      let currentChar = userObj.username[i].toUpperCase().charCodeAt();
+      if(currentChar > 47 && currentChar < 91){
+        if(currentChar > 57 && currentChar < 65){
+          valid = false;
+          errorMsg = 'Username cannot contain punctuation.'
+        }
+      } else {
+        valid = false;
+        errorMsg = 'Username cannot contain punctuation.'
+      }
+    }
+
+    //Email has proper format
+    let emailReg = (
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+    if(userObj.email.match(emailReg) === null){
+      valid = false;
+      errorMsg = 'Email must be valid.';
+    }
+
+    //Phone number is a number
+    let number = parseInt(userObj.phone);
+    if(isNaN(number)) {
+      valid = false;
+      errorMsg = 'Phone number must be a number.'
+    }
+    //Phone number is 10 digits
+    if(String(number).length < 10){
+      valid = false;
+      errorMsg = 'Phone number must be 10 digits.'
+    }
+
+
+    if(valid){
+      knex('users')
+        .insert({
+          firstname: userObj.firstName,
+          lastname: userObj.lastName,
+          username: userObj.username,
+          email: userObj.email,
+          phone: userObj.phone
+        })
+        .returning(['firstname', 'lastname', 'username','phone','email'])
+        .then((results) => {
+          res.send(results[0]);
+        })
+        .catch((err) => {
+          next(err);
+        });
+    } else {
+      res.status(418).send(errorMsg);
+    }
   }
+
 });
 
 module.exports = router;
